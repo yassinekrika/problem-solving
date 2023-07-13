@@ -60,24 +60,11 @@
 
 
 export function encodeCD(n: number): string {
-    let encode: string = 'P'
-    let nbr:string = '0'.repeat(8 - n.toString(2).length) + n.toString(2)
-    
-    let str:string = nbr.split('').reverse().map((n) => {
-      if (n === "1") {
-        if (encode[encode.length] === 'L'){
-          encode + 'P'
-        } else if (encode[encode.length] === 'P') {
-          encode + 'L'
-        }
-      } else {
-        encode + encode[encode.length]
-      }
-      return encode
-  //     return n === '1' && encode[encode.length - 1] === 'L' ? encode + 'P' : encode +'L'                                            
-    }).join('')
-    console.log(str)
-    return str
+  let binaryNumber:string = '0'.repeat(8 - n.toString(2).length) + n.toString(2)
+  let encode:string = 'P'
+  binaryNumber.split('').reverse().forEach(n => n === '1' ? encode[encode.length - 1] === 'P' ? 
+  encode += 'L' : encode += 'P' : encode += encode[encode.length - 1])
+  return encode
 }
 
 console.log(encodeCD(5))
